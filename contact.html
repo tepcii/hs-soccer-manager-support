@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高校サッカーマネージャー — お問い合わせ</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    line-height: 1.8; color: #2e241f; background: #fdfaf3;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #ece5da; background: #1b1815; }
+    .card { background: #262220 !important; border-color: #3a3430 !important; }
+    a { color: #7fc98d !important; }
+    input, select, textarea { background: #1f1c1a !important; color: #ece5da !important; border-color: #3a3430 !important; }
+    .env { background: #1f1c1a !important; }
+  }
+  header {
+    background: linear-gradient(160deg, #2a8f3a, #1f6f2c);
+    color: #fff; padding: 40px 20px 32px; text-align: center;
+  }
+  header h1 { margin: 0 0 6px; font-size: 24px; }
+  header p { margin: 0; opacity: .9; font-size: 15px; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 20px 64px; }
+  h2 { font-size: 19px; margin: 30px 0 12px; border-left: 5px solid #2a8f3a; padding-left: 10px; }
+  .card {
+    background: #fff; border: 1px solid #e6ded0; border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  a { color: #1f6f2c; }
+  label { display: block; font-weight: 700; margin: 16px 0 6px; font-size: 15px; }
+  input, select, textarea {
+    width: 100%; padding: 10px 12px; font-size: 16px; font-family: inherit;
+    border: 1px solid #d8cdbb; border-radius: 10px; background: #fff; color: #2e241f;
+  }
+  textarea { min-height: 160px; resize: vertical; line-height: 1.7; }
+  .hint { font-size: 13px; opacity: .75; margin: 4px 0 0; }
+  .btn {
+    display: inline-block; width: 100%; margin-top: 22px; padding: 14px 18px;
+    background: #2a8f3a; color: #fff; border: none; border-radius: 12px;
+    font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer;
+  }
+  .btn:disabled { background: #b9b2a6; cursor: default; }
+  .env { background: #f4efe4; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-top: 14px; }
+  footer { text-align: center; font-size: 13px; opacity: .7; padding: 24px 20px 48px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>お問い合わせ</h1>
+  <p>高校サッカーマネージャー</p>
+</header>
+
+<main>
+  <p>不具合のご報告・ご要望・その他のお問い合わせはこちらからお送りください。
+  下の項目を入力して「メールを作成する」を押すと、内容を入れた状態でメールアプリが開きます。
+  最後にご自身で送信してください。</p>
+
+  <div class="card">
+    <label for="cat">お問い合わせの種類</label>
+    <select id="cat">
+      <option>不具合の報告</option>
+      <option>ご要望・改善のお願い</option>
+      <option>購入・復元について</option>
+      <option>データの引き継ぎについて</option>
+      <option>その他</option>
+    </select>
+
+    <label for="body">内容</label>
+    <textarea id="body" placeholder="できるだけ詳しくお書きください。&#10;&#10;例）&#10;・どの画面で起きたか&#10;・何をしたら起きたか&#10;・何回くらい起きたか"></textarea>
+    <p class="hint">不具合の場合は、起きた画面と手順を書いていただけると調査が早く進みます。スクリーンショットや録画がある場合は、メールに添付してください。</p>
+
+    <label for="reply">返信先メールアドレス（任意）</label>
+    <input id="reply" type="email" placeholder="返信が必要な場合はご記入ください" autocomplete="email">
+
+    <div class="env">
+      <strong>環境情報</strong>（自動で付きます）<br>
+      <span id="envtext">アプリから開くと、バージョンと端末の情報がここに入ります</span>
+    </div>
+
+    <button class="btn" id="send">メールを作成する</button>
+    <p class="hint">メールアプリが開かない場合は、
+      <a href="mailto:pepci.oishii@gmail.com">pepci.oishii@gmail.com</a> 宛に直接お送りください。</p>
+  </div>
+
+  <h2>お送りいただく前に</h2>
+  <div class="card">
+    <p><a href="index.html">よくあるご質問</a>に、購入の復元・機種変更の引き継ぎ・iCloud バックアップについての説明があります。
+    あわせてご確認ください。</p>
+  </div>
+
+  <footer>
+    <p>高校サッカーマネージャー / TENZO<br>
+    <a href="index.html">サポートトップ</a>　<a href="privacy.html">プライバシーポリシー</a></p>
+  </footer>
+</main>
+
+<script>
+  // アプリから ?v=1.3.1&b=176&os=... &dev=... の形で環境情報を受け取る（無ければ空欄のまま）
+  var q = new URLSearchParams(location.search);
+  var env = [];
+  if (q.get('v')) env.push('アプリ ' + q.get('v') + (q.get('b') ? ' (' + q.get('b') + ')' : ''));
+  if (q.get('os')) env.push(q.get('os'));
+  if (q.get('dev')) env.push(q.get('dev'));
+  if (q.get('lang')) env.push(q.get('lang'));
+  var envText = env.join(' / ');
+  if (envText) document.getElementById('envtext').textContent = envText;
+
+  document.getElementById('send').addEventListener('click', function () {
+    var cat = document.getElementById('cat').value;
+    var body = document.getElementById('body').value.trim();
+    var reply = document.getElementById('reply').value.trim();
+    var lines = [body, '', '----------------', '種類: ' + cat];
+    if (reply) lines.push('返信先: ' + reply);
+    if (envText) lines.push('環境: ' + envText);
+    var subject = '【高校サッカーマネージャー】' + cat;
+    location.href = 'mailto:pepci.oishii@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(lines.join('\n'));
+  });
+</script>
+</body>
+</html>
